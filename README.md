@@ -19,7 +19,7 @@ There are a few differences in syntax. Users must specify the type of functions 
 ## Summary
 With UDFs, or user-defined functions, users can repeatedly perform tasks without writing new code. UDFs can also be used for constraint checking and reporting purposes. Scalar Functions, one of the three UDF types, return a single values, while Inline and Multi-Statement Functions return a table of data. 
 
-## Referece
+## Reference
 Gould, A. (2013, Feb 20), SQL Server Programming Part 10 - Table Valued Function, WiseOwlTutorials, www.youtube.com/watch?v=nCAEgNxC7nU
 
 # Assignment 7 - Writeup for Module 7
