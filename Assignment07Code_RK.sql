@@ -225,7 +225,7 @@ GO
 
 SELECT
      [Product Name] = ProductName
-	,[Inventory Date] = DATENAME(MONTH, InventoryDate) + ' ' + DATENAME(YEAR, InventoryDate)
+	,[Inventory Date] = DATENAME(MONTH, InventoryDate) + ', ' + DATENAME(YEAR, InventoryDate)
 	,[Inventory Count] = Count 
   FROM vProducts AS P 
    JOIN vInventories AS I   
@@ -243,7 +243,7 @@ CREATE VIEW vProductInventories AS
  SELECT
  TOP 100000
 	 [Product Name] = ProductName
-	,[Inventory Date] = DATENAME(MONTH, InventoryDate) + ' ' + DATENAME(YEAR, InventoryDate)
+	,[Inventory Date] = DATENAME(MONTH, InventoryDate) + ', ' + DATENAME(YEAR, InventoryDate)
 	,[Inventory Count] = Count 
   FROM vProducts AS P 
    JOIN vInventories AS I   
@@ -265,7 +265,7 @@ CREATE VIEW vCategoryInventories AS
   SELECT 
     TOP 100000
 	 [Category Name] = CategoryName
-	,[Inventory Date] = DATENAME(MONTH, InventoryDate) + ' ' + DATENAME(YEAR, InventoryDate)
+	,[Inventory Date] = DATENAME(MONTH, InventoryDate) + ', ' + DATENAME(YEAR, InventoryDate)
 	,[Inventory Count] = SUM(Count) OVER(PARTITION BY CategoryName)
   FROM vCategories AS C  
    JOIN vProducts AS P
