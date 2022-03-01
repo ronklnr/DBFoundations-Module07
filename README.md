@@ -22,7 +22,7 @@ With UDFs, or user-defined functions, users can repeatedly perform tasks without
 ## Reference
 Gould, A. (2013, Feb 20), SQL Server Programming Part 10 - Table Valued Function, WiseOwlTutorials, www.youtube.com/watch?v=nCAEgNxC7nU
 
-# Assignment 7 - Writeup for Module 7
+# Assignment 7 - Code for Module 7
 ```
 # ------------------------------------------------- #
 # Title: Assignment7
@@ -72,7 +72,7 @@ SELECT
   FROM vProducts AS P 
    JOIN vInventories AS I   
     ON P.ProductID = I.ProductID
-  ORDER BY ProductName, MONTH(InventoryDate), YEAR(InventoryDate);
+  ORDER BY ProductName, InventoryDate;
 GO 
 
 -- Question 4 (10% of pts): 
@@ -90,7 +90,7 @@ CREATE VIEW vProductInventories AS
   FROM vProducts AS P 
    JOIN vInventories AS I   
     ON P.ProductID = I.ProductID
-  ORDER BY ProductName, MONTH(InventoryDate), YEAR(InventoryDate);
+  ORDER BY ProductName, InventoryDate;
 GO 
 
 -- Check that it works: Select * From vProductInventories;
@@ -108,16 +108,17 @@ CREATE VIEW vCategoryInventories AS
     TOP 100000
 	 [Category Name] = CategoryName
 	,[Inventory Date] = DATENAME(MONTH, InventoryDate) + ', ' + DATENAME(YEAR, InventoryDate)
-	,[Inventory Count] = SUM(Count) OVER(PARTITION BY CategoryName)
+	,[Inventory Count] = SUM(Count)
   FROM vCategories AS C  
    JOIN vProducts AS P
     ON C.CategoryID = P.CategoryID
    JOIN vInventories AS I  
     ON P.ProductID = I.ProductID
- ORDER BY CategoryName, MONTH(InventoryDate), YEAR(InventoryDate);
+ GROUP BY CategoryName, InventoryDate
+ ORDER BY CategoryName, InventoryDate;
 GO  
 
--- Check that it works: Select * From vCategoryInventories;
+-- Check that it works
 SELECT * FROM vCategoryInventories;
 GO
 
@@ -165,7 +166,7 @@ CREATE VIEW vProductInventoriesWithPreviouMonthCountsWithKPIs AS
       WHEN [Inventory Count] < [Previous Month Count] THEN -1
 	 END
   FROM vProductInventoriesWithPreviouMonthCounts
-  ORDER BY [Product Name], MONTH([Inventory Date]), YEAR([INVENTORY Date]);
+  ORDER BY [Product Name], MONTH([Inventory Date]), YEAR([Inventory Date]);
 GO 
 
 -- Important: This new view must use your vProductInventoriesWithPreviousMonthCounts view!
@@ -181,18 +182,19 @@ GO
 -- The function must use the ProductInventoriesWithPreviousMonthCountsWithKPIs view.
 -- Varify that the results are ordered by the Product and Date.
 
-CREATE FUNCTION fProductInventoriesWithPreviousMonthCountsWithKPIs(@Value INT)
+CREATE FUNCTION fProductInventoriesWithPreviousMonthCountsWithKPIs(@Value int)
   RETURNS TABLE 
   AS 
 	RETURN 
-	(SELECT 
+	(SELECT TOP 100000 
 	  	 [Product Name] 
 	    ,[Inventory Date] 
 	    ,[Inventory Count] 
         ,[Previous Month Count]
 		,[KPI] 
 	 FROM vProductInventoriesWithPreviouMonthCountsWithKPIs
-	 WHERE [KPI] = @Value);
+	 WHERE [KPI] = @Value
+	 ORDER BY [Product Name], MONTH([Inventory Date]), YEAR([Inventory Date]));
 GO 
 
 /* Check that it works:
