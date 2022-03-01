@@ -204,5 +204,5 @@ GO
 #### Results of Question 8
 
                         
-![Results of Question 8](Figure13.png "Results of Question 8")  
+![Results of Question 8](https://github.com/ronklnr/DBFoundations-Module07/blob/main/Results%20Question8.png "Results of Question 8")  
 #### Figure 1. The results of Question 8
