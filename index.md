@@ -1,8 +1,8 @@
 # Assignment 7 - Writeup for Module 7
 
 **Name:** Ron Klangnarong  
-**Date:** March 1, 2022
-
+**Date:** March 1, 2022  
+**GitHub URL:** https://github.com/ronklnr/DBFoundations-Module07
 
 ## Introduction
 This write-up is part of the assignment for Module 7. It answers two questions: when to use an SQL UDF and the differences between Scalar, Inline, and Multi-Statement Functions.
@@ -22,9 +22,10 @@ With UDFs, or user-defined functions, users can repeatedly perform tasks without
 ## Referece
 Gould, A. (2013, Feb 20), SQL Server Programming Part 10 - Table Valued Function, WiseOwlTutorials, www.youtube.com/watch?v=nCAEgNxC7nU
 
+# Assignment 7 - Writeup for Module 7
 ```
 # ------------------------------------------------- #
-# Title: Assignment07
+# Title: Assignment7
 ## Author: Ron Klangnarong
 ## Desc: This file demonstrates how to use Functions
 ## Change Log: When,Who,What
